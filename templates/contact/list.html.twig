@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% block header_subtitle %}
+    Liste des contacts
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/pagination.css') }}"/>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered" id="table">
+        <thead>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Détails</th>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.nom }}</td>
+                <td>{{ contact.prenom }}</td>
+                <td><a href="{{ path('details_contact', {id:contact.id}) }}"><i class="far fa-eye"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(contacts) }}
+    </div>
+
+    <a class="btn btn-block btn-dark" href="{{ path('create_contact') }}">Ajouter un nouveau contact</a>
+{% endblock %}

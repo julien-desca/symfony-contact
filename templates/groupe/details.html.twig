@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>{{ groupe.nom }}</h3>
+    <ul>
+        {% for contact in groupe.contacts %}
+            <li><a href="{{ path('details_contact', {id : contact.id}) }}">{{ contact.nom }} {{ contact.prenom }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

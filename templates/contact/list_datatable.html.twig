@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    {{ parent() }}
+    <link href='https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css' rel='stylesheet' type='text/css'>
+    <link href="{{ asset('css/pagination.css') }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+{% block header_subtitle %}
+    Liste des contacts
+{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered" id="table">
+        <thead>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Détails</th>
+        </thead>
+        <tbody>
+        {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.nom }}</td>
+                <td>{{ contact.prenom }}</td>
+                <td><a href="{{ path('details_contact', {id:contact.id}) }}"><i class="far fa-eye"></i></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-block btn-dark" href="{{ path('create_contact') }}">Ajouter un nouveau contact</a>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        $(function (){
+            $("#table").DataTable();
+        });
+    </script>
+{% endblock %}

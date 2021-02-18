@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block header_subtitle %}
+    Liste des groupes
+{% endblock %}
+{% block body %}
+    <ul>
+        {% for groupe in groupes %}
+            <li><a href="{{ path('groupe_details', {id : groupe.id}) }}">{{ groupe.nom }}</a> ({{ groupe.contacts|length }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

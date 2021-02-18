@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block header_title %}
+    {% if contact is defined %}
+        {{ contact.nom }} {{ contact.prenom }}
+    {% endif %}
+{% endblock %}
+
+{% block header_subtitle %}
+    {% if contact is defined %}
+        Mise à jour du contact
+    {% else %}
+        Création d'un nouveau contact
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.groupes) }}
+    <input type="submit"/>
+    {{ form_end(form) }}
+{% endblock %}

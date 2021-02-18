@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block header_title %}
+    {{contact.nom}} {{ contact.prenom }}
+{% endblock %}
+
+{% block header_subtitle %}
+    Détails du contact
+{% endblock %}
+
+{% block body %}
+    <p>Nom: {{ contact.nom }}</p>
+    <p>Prenom: {{ contact.prenom }}</p>
+    <div class="row">
+        <div class="col-5">
+            <p>Téléphones:</p>
+            <ul>
+                {% for tel in contact.telephones %}
+                    <li>
+                        {{ tel.telephone }}
+                        <a href="{{ path('phone_delete', {id: tel.id, token: csrf_token('delete-form')}) }}"><i class="fa fa-trash"></i></a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-5">
+            <p>Groupes:</p>
+            <ul>
+                {% for groupe in contact.groupes %}
+                    <li>{{ groupe.nom }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Ajouter un numéro de téléphone
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            {{ form_row(form.telephone) }}
+            <input type="submit" class="btn btn-dark" value="Enregister"/>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+
+
+    {{ form_start(deleteForm) }}
+    <input type="submit" class="btn btn-danger btn-block mt-2 mb-1" value="Supprimer le contact">
+    {{ form_end(deleteForm) }}
+    <a href="{{ path("update_contact", {id: contact.id}) }}" class="btn-block btn btn-dark">Mise à jour du contact</a>
+{% endblock %}
